@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="clinic_ai_tree_view" model="ir.ui.view">
+        <field name="name">clinic.ai.tree</field>
+        <field name="model">clinic.ai</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="clinic_ai_form_view" model="ir.ui.view">
+        <field name="name">clinic.ai.form</field>
+        <field name="model">clinic.ai</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name" />
+                    <field name="partner_id"/>
+                </group>
+                <notebook>
+                    <page string="Risk Points">
+                        <field name="risk_points" />
+                        <field name="risk_details" />
+                        <button string="Compute Risk Points" type="object" name="action_compute_risk_data" />
+                    </page>
+                    <page string="Suggested Treatment">
+                        <field name="suggested_treatment" />
+                        <button string="Compute Suggested Treatment" type="object" name="action_compute_suggested_treatment" />
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record id="clinic_ai_action" model="ir.actions.act_window">
+        <field name="name">Clinic AI</field>
+        <field name="res_model">clinic.ai</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="clinic_ai.clinic_ai_menu"
+        name="Clinic AI"
+        sequence="11"
+        action="clinic_ai.clinic_ai_action"
+        web_icon="clinic_ai,static/description/icon.png"
+        groups="base.group_user" />
+
+</odoo>
