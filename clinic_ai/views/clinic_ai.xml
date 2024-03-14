@@ -49,4 +49,12 @@
         web_icon="clinic_ai,static/description/icon.png"
         groups="base.group_user" />
 
+    <menuitem
+        id="clinic_ai.clinic_ai_main_menu"
+        name="Clinic AI"
+        sequence="1"
+        parent="clinic_ai.clinic_ai_menu"
+        action="clinic_ai.clinic_ai_action"
+        groups="base.group_user" />
+
 </odoo>

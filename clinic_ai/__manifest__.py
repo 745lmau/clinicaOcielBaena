@@ -11,6 +11,7 @@
     "data": [
         "security/ir.model.access.csv",
         "views/clinic_ai.xml",
+        "views/res_company.xml",
     ],
     "depends": [
         "ob_clinic",

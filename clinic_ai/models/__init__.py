@@ -1,2 +1,2 @@
 from . import clinic_ai
-from . import res_partner
+from . import res_company

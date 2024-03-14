@@ -1,10 +1,14 @@
+from openai import OpenAI
+
 from odoo import api, fields, models
 
 
 class ClinicAI(models.Model):
     _name = "clinic.ai"
 
-    name = fields.Char()
+    name = fields.Char(
+        required=True,
+    )
     partner_id = fields.Many2one(
         comodel_name="res.partner",
     )
@@ -32,7 +36,36 @@ class ClinicAI(models.Model):
             record.partner_id.suggested_treatment = record.suggested_treatment
 
     def action_compute_risk_data(self):
-        pass
+        for record in self:
+            client = OpenAI(
+                api_key=self.get_openai_token(),
+            )
+            chat_completion = client.chat.completions.create(
+                messages=[
+                    {
+                        "role": "user",
+                        "content": "Say this is a test",
+                    }
+                ],
+                model="gpt-3.5-turbo",
+            )
+            record.risk_details = chat_completion.choices[0].message
 
     def action_compute_suggested_treatment(self):
-        pass
+        for record in self:
+            client = OpenAI(
+                api_key=self.get_openai_token(),
+            )
+            chat_completion = client.chat.completions.create(
+                messages=[
+                    {
+                        "role": "user",
+                        "content": "Say this is a test",
+                    }
+                ],
+                model="gpt-3.5-turbo",
+            )
+            record.suggested_treatment = chat_completion.choices[0].message
+
+    def get_openai_token(self):
+        return self.env.company.openai_token
